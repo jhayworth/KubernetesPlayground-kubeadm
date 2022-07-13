@@ -15,9 +15,8 @@ uptime_requirement                  = "Pacific-Work"
 
 key_name                            = "AWS_DevOps_0011"
 connection_private_key_file_path    = "~/.ssh/AWS_DevOps_0011.pem"
-devops_tech                         = "Put your name here"
+devops_tech                         = "Joshua Hayworth"
 devops_tech_email                   = "devops@kratosdefense.com"
 
-chef_server_url                     = "https://chefopsworks.devops.kratosdefense.com/organizations/devops" 
 dns_hosted_zone_id                  = "Z23HC9WI8FOZFM"
 dns_host_record_name                = "example-server.devops.kratosdefense.com"

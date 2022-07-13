@@ -12,11 +12,12 @@ provider "aws" {
             # Default Tags for InfoOps
             OWNER = var.devops_tech
             EMAIL = var.devops_tech_email
+	    HOURS = "N/A"
 	}
     }
 }
 
-resource "aws_instance" "example" {
+resource "aws_instance" "kubernetes-1" {
     ami                     = var.ami
     private_ip              = var.private_ip
     instance_type           = var.instance_type
@@ -71,12 +72,4 @@ resource "aws_instance" "example" {
     provisioner "local-exec" {
         command = "knife bootstrap ${aws_instance.example.private_ip} -N ${var.dns_host_record_name} -x centos --sudo >> output/${aws_instance.example.id}_cheflog.txt"
     }
-}
-
-resource "aws_route53_record" "example_dns" {
-  zone_id = var.dns_hosted_zone_id
-  name    = var.dns_host_record_name
-  type    = "A"
-  ttl     = "300"
-  records = [aws_instance.example.private_ip]
 }

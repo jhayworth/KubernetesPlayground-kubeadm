@@ -76,12 +76,6 @@ variable "devops_tech_email" {
     default = "devops@kratosdefense.com"
 }
 
-variable "chef_server_url" {
-    type = string
-    description = "URL pointing to the chef server that will serve this instance"
-    default = "https://chefopsworks.devops.kratosdefense.com/organizations/devops"
-}
-
 variable "dns_hosted_zone_id" {
     type = string
     description = "ID for the DNS zone assigned by Amazon"
