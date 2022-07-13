@@ -52,24 +52,10 @@ resource "aws_instance" "kubernetes-1" {
         destination = "/tmp/downloadartifacts.sh"
     }
 
-    provisioner "file" {
-        content     = data.template_file.chef-config.rendered
-        destination = "/tmp/config.rb"
-    }
-
-    provisioner "file" {
-        source = "secrets/devops-validator.pem"
-        destination = "/tmp/devops-validator.pem"
-    }
-
     provisioner "remote-exec" {
         inline = [
               "sudo chmod +x /tmp/downloadartifacts.sh",
               "sudo /tmp/downloadartifacts.sh"
         ]
-    }
-
-    provisioner "local-exec" {
-        command = "knife bootstrap ${aws_instance.example.private_ip} -N ${var.dns_host_record_name} -x centos --sudo >> output/${aws_instance.example.id}_cheflog.txt"
     }
 }
