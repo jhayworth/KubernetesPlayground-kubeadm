@@ -76,22 +76,6 @@ variable "devops_tech_email" {
     default = "devops@kratosdefense.com"
 }
 
-variable "dns_hosted_zone_id" {
-    type = string
-    description = "ID for the DNS zone assigned by Amazon"
-}
-
-variable "dns_host_record_name" {
-    type = string
-    description = "A DNS host record pointing to this instance"
-}
-
-variable "uptime_requirement" {
-    type = string
-    description = "Part of the default tag set. This will tell Park My Cloud the schedule to assign to your resource"
-}
-
-
 
 
 
