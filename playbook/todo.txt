@@ -71,9 +71,7 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-clu
 # --pod-network-cidr string
 Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node.
 
-sudo kubeadm init --pod-network-cidr 10.244.0.0/16 --apiserver-advertise-address 10.245.160.87
-
-
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=10.245.160.87
 
 # == References
 # https://www.howtoforge.com/setup-a-kubernetes-cluster-on-aws-ec2-instance-ubuntu-using-kubeadm/amp/
