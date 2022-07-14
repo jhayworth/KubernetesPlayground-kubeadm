@@ -1,7 +1,7 @@
-variable "shared_credentials_file" {
-    type = string
+variable "shared_credential_files" {
+    type = list(string)
     description = "Shared Credentials File"
-    default = "~/.aws/credentials"
+    default = ["~/.aws/credentials"]
 }
 
 variable "region" {

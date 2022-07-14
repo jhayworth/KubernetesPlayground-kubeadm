@@ -1,4 +1,4 @@
-shared_credentials_file             = "~/.aws/credentials"
+shared_credential_files            = ["~/.aws/credentials"]
 region                              = "us-west-2"
 
 # == AWS related

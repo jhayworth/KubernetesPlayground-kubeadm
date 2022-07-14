@@ -1,6 +1,6 @@
 provider "aws" {
-    shared_credentials_file = var.shared_credentials_file
-    region                  = var.region
+    shared_credentials_files = var.shared_credential_files
+    region                   = var.region
 
     default_tags {
         tags = {
