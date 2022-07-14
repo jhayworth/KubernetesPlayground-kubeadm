@@ -16,22 +16,10 @@ variable "tool_name" {
     default = "example"
 }
 
-variable "instance_name" {
-    type = string
-    description = "Host name for the instance that will be created"
-    default = "ec2-uw2-2a-example-server-name"
-}
-
 variable "ami" {
     type = string
     description = "Amazon Machine ID"
     default = "ami-3ecc8f46"
-}
-
-variable "private_ip" {
-    type = string
-    description = "IP for the Artifactory instance"
-    default = ""
 }
 
 variable "instance_type" {
@@ -74,6 +62,16 @@ variable "devops_tech_email" {
     type = string
     description = "The DevOps Technician primarily responsible for creating this instance. Used for tagging."
     default = "devops@kratosdefense.com"
+}
+
+variable "kubernetes_primary_name" {
+    type = string
+    description = "The NAME tag for the primary kubernetes node - control"
+}
+
+variable "kubernetes_secondary_name" {
+    type = string
+    description = "The NAME tag for the secondary kubernetes node - worker"
 }
 
 

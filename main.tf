@@ -17,28 +17,71 @@ provider "aws" {
     }
 }
 
-resource "aws_instance" "kubernetes-1" {
+resource "aws_instance" "kubernetes-primary" {
     ami                     = var.ami
     private_ip              = var.private_ip
     instance_type           = var.instance_type
     subnet_id               = var.subnet_id
     vpc_security_group_ids  = var.vpc_security_group_ids
     key_name                = var.key_name
-    user_data               = file("scripts/user-data.sh")
+    #user_data               = file("scripts/user-data.sh")
 
     root_block_device {
         delete_on_termination = "true"
-        volume_size           = "100"
+        volume_size           = "25"
         volume_type           = "gp2"
     }
 
     tags = {
-        Name = var.tool_name
-        HOURS = var.uptime_requirement
+        Name = var.kubernetes_primary_name
+        HOURS = "N/A"
     }
 
     connection {
-        host              = aws_instance.example.private_ip
+        host              = aws_instance.kubernetes-primary.private_ip
+        user              = "ubuntu"
+        private_key       = file(var.connection_private_key_file_path)
+        timeout           = "15m"
+    }
+
+    provisioner "local-exec" { command = "echo id : ${aws_instance.example.id} >> ${aws_instance.example.id}_id.txt" }
+    provisioner "local-exec" { command = "echo private_ip : ${aws_instance.example.private_ip} >> ${aws_instance.example.id}_id.txt" }
+
+    #provisioner "file" {
+    #    source = "scripts/downloadartifacts.sh"
+    #    destination = "/tmp/downloadartifacts.sh"
+    #}
+
+    #provisioner "remote-exec" {
+    #    inline = [
+    #          "sudo chmod +x /tmp/downloadartifacts.sh",
+    #          "sudo /tmp/downloadartifacts.sh"
+    #    ]
+    #}
+}
+
+resource "aws_instance" "kubernetes-secondary" {
+    ami                     = var.ami
+    private_ip              = var.private_ip
+    instance_type           = var.instance_type
+    subnet_id               = var.subnet_id
+    vpc_security_group_ids  = var.vpc_security_group_ids
+    key_name                = var.key_name
+    #user_data               = file("scripts/user-data.sh")
+
+    root_block_device {
+        delete_on_termination = "true"
+        volume_size           = "25"
+        volume_type           = "gp2"
+    }
+
+    tags = {
+        Name = var.kubernetes_secondary_name
+        HOURS = "N/A"
+    }
+
+    connection {
+        host              = aws_instance.kubernetes-secondary.private_ip
         user              = "centos"
         private_key       = file(var.connection_private_key_file_path)
         timeout           = "15m"
@@ -47,15 +90,15 @@ resource "aws_instance" "kubernetes-1" {
     provisioner "local-exec" { command = "echo id : ${aws_instance.example.id} >> ${aws_instance.example.id}_id.txt" }
     provisioner "local-exec" { command = "echo private_ip : ${aws_instance.example.private_ip} >> ${aws_instance.example.id}_id.txt" }
 
-    provisioner "file" {
-        source = "scripts/downloadartifacts.sh"
-        destination = "/tmp/downloadartifacts.sh"
-    }
+    #provisioner "file" {
+    #    source = "scripts/downloadartifacts.sh"
+    #    destination = "/tmp/downloadartifacts.sh"
+    #}
 
-    provisioner "remote-exec" {
-        inline = [
-              "sudo chmod +x /tmp/downloadartifacts.sh",
-              "sudo /tmp/downloadartifacts.sh"
-        ]
-    }
+    #provisioner "remote-exec" {
+    #    inline = [
+    #          "sudo chmod +x /tmp/downloadartifacts.sh",
+    #          "sudo /tmp/downloadartifacts.sh"
+    #    ]
+    #}
 }
