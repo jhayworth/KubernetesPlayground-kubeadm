@@ -1,5 +1,9 @@
 I need to get my playbook to do the following:
 
+# == Step -1 - Pre-setup
+
+sudo hostnamectl set-hostname "appropriate node name goes here"
+
 # == Step 0 - Install personal tools
 # Developer comfort
 
@@ -50,6 +54,9 @@ sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
 
+echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
+sudo sysctl -p
+
 # == Step 3 - Setting up server node
 
 https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/
@@ -65,3 +72,10 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-clu
 Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node.
 
 sudo kubeadm init --pod-network-cidr 10.244.0.0/16 --apiserver-advertise-address 10.245.160.87
+
+
+
+# == References
+# https://www.howtoforge.com/setup-a-kubernetes-cluster-on-aws-ec2-instance-ubuntu-using-kubeadm/amp/
+# https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/
+# https://medium.com/andcloudio/creating-kubernetes-cluster-using-kubeadm-13b6f95b4fb9
