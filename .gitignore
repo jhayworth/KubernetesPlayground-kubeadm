@@ -11,6 +11,7 @@ secrets/
 
 # Terraform related
 .terraform
+.terraform.lock.hcl
 statebackups
 *.info
 *.tfstate.backup
