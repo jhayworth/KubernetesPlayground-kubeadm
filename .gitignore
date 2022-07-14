@@ -1,0 +1,36 @@
+# General
+secrets/
+*.dll
+*.exe
+*.log
+*.bak
+*.txt
+
+# Emacs nonsense
+*~
+
+# Terraform related
+.terraform
+statebackups
+*.info
+*.tfstate.backup
+.DS_Store
+example.tf
+terraform.tfplan
+tfplan
+terraform.tfstate
+bin/
+modules-dev/
+/pkg/
+*.backup
+./*.tfstate
+.terraform/
+.*.swp
+.idea
+*.iml
+*.test
+*.iml
+
+# Test exclusions
+!command/test-fixtures/**/*.tfstate
+!command/test-fixtures/**/.terraform/

@@ -19,7 +19,6 @@ provider "aws" {
 
 resource "aws_instance" "kubernetes-primary" {
     ami                     = var.ami
-    private_ip              = var.private_ip
     instance_type           = var.instance_type
     subnet_id               = var.subnet_id
     vpc_security_group_ids  = var.vpc_security_group_ids
@@ -44,8 +43,8 @@ resource "aws_instance" "kubernetes-primary" {
         timeout           = "15m"
     }
 
-    provisioner "local-exec" { command = "echo id : ${aws_instance.example.id} >> ${aws_instance.example.id}_id.txt" }
-    provisioner "local-exec" { command = "echo private_ip : ${aws_instance.example.private_ip} >> ${aws_instance.example.id}_id.txt" }
+    provisioner "local-exec" { command = "echo id : ${aws_instance.kubernetes-primary.id} >> ${aws_instance.kubernetes-primary.id}_id.txt" }
+    provisioner "local-exec" { command = "echo private_ip : ${aws_instance.kubernetes-primary.private_ip} >> ${aws_instance.kubernetes-primary.id}_id.txt" }
 
     #provisioner "file" {
     #    source = "scripts/downloadartifacts.sh"
@@ -62,7 +61,6 @@ resource "aws_instance" "kubernetes-primary" {
 
 resource "aws_instance" "kubernetes-secondary" {
     ami                     = var.ami
-    private_ip              = var.private_ip
     instance_type           = var.instance_type
     subnet_id               = var.subnet_id
     vpc_security_group_ids  = var.vpc_security_group_ids
@@ -87,8 +85,8 @@ resource "aws_instance" "kubernetes-secondary" {
         timeout           = "15m"
     }
 
-    provisioner "local-exec" { command = "echo id : ${aws_instance.example.id} >> ${aws_instance.example.id}_id.txt" }
-    provisioner "local-exec" { command = "echo private_ip : ${aws_instance.example.private_ip} >> ${aws_instance.example.id}_id.txt" }
+    provisioner "local-exec" { command = "echo id : ${aws_instance.kubernetes-secondary.id} >> ${aws_instance.kubernetes-secondary.id}_id.txt" }
+    provisioner "local-exec" { command = "echo private_ip : ${aws_instance.kubernetes-secondary.private_ip} >> ${aws_instance.kubernetes-secondary.id}_id.txt" }
 
     #provisioner "file" {
     #    source = "scripts/downloadartifacts.sh"
