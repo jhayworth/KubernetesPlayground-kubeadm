@@ -23,7 +23,6 @@ resource "aws_instance" "kubernetes-primary" {
     subnet_id               = var.subnet_id
     vpc_security_group_ids  = var.vpc_security_group_ids
     key_name                = var.key_name
-    #user_data               = file("scripts/user-data.sh")
 
     root_block_device {
         delete_on_termination = "true"
@@ -34,6 +33,7 @@ resource "aws_instance" "kubernetes-primary" {
     tags = {
         Name = var.kubernetes_primary_name
         HOURS = "N/A"
+	DevOpsTech = "Joshua"
     }
 
     connection {
@@ -65,7 +65,6 @@ resource "aws_instance" "kubernetes-secondary" {
     subnet_id               = var.subnet_id
     vpc_security_group_ids  = var.vpc_security_group_ids
     key_name                = var.key_name
-    #user_data               = file("scripts/user-data.sh")
 
     root_block_device {
         delete_on_termination = "true"
@@ -76,6 +75,7 @@ resource "aws_instance" "kubernetes-secondary" {
     tags = {
         Name = var.kubernetes_secondary_name
         HOURS = "N/A"
+	DevOpsTech = "Joshua"
     }
 
     connection {
