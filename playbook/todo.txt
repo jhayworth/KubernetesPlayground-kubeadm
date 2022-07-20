@@ -1,9 +1,5 @@
 I need to get my playbook to do the following:
 
-# == Step -1 - Pre-setup
-
-sudo hostnamectl set-hostname "appropriate node name goes here"
-
 # == Step 0 - Install personal tools
 # Developer comfort
 
@@ -57,7 +53,11 @@ sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
 echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 
-# == Step 3 - Setting up server node
+# == Step 3 - Server node hostname
+
+sudo hostnamectl set-hostname "appropriate node name goes here"
+
+# == Step 4 - Setting up server node
 
 https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/
 https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
