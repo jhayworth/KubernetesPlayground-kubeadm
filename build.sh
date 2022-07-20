@@ -15,9 +15,18 @@ generate_downloadartifacts_script() {
     chmod +x scripts/downloadartifacts.sh
 }
 
+generate_ansible_inventory () {
+    if [ -f "playbook/inventory" ]; then
+	rm playbook/inventory
+    fi
+
+    cp templates/ansible_inventory.template playbook/inventory
+}
+
 # Now we can run terraform
 if [ "$1" == "apply" ]; then
-    generate_downloadartifacts_script
+    #generate_downloadartifacts_script
+    generate_ansible_inventory
     terraform apply | tee terraform_run.log
 elif [ "$1" == "destroy" ]; then
     terraform destroy

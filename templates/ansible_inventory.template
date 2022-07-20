@@ -1,0 +1,7 @@
+localhost ansible_connection=local ansible_python_interpreter="/usr/bin/python3"
+
+[kubernetes]
+k8_joshua_test_primary ansible_host={:primary_server_ip:} ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/joshua-hayworth/.ssh/AWS_DevOps_0011.pem
+k8_joshua_test_secondary ansible_host={:secondary_server_ip:} ansible_connection=ssh ansible_user=ubuntu ansible_ssh_private_key_file=/home/joshua-hayworth/.ssh/AWS_DevOps_0011.pem
+
+
