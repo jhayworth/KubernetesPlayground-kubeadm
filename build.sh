@@ -30,4 +30,8 @@ if [ "$1" == "apply" ]; then
     terraform apply | tee terraform_run.log
 elif [ "$1" == "destroy" ]; then
     terraform destroy
+elif [ "$1" == "clean" ]; then
+    rm playbook/inventory
+    rm scripts/downloadartifacts.sh
+    rm *.txt
 fi
