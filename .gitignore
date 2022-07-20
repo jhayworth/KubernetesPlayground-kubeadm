@@ -1,3 +1,7 @@
+# Specific files derived from templates
+playbook/inventory
+scritps/downloadartifacts.sh
+
 # General
 secrets/
 *.dll
