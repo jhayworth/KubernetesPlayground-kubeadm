@@ -17,7 +17,7 @@ generate_downloadartifacts_script() {
 
 generate_ansible_inventory () {
     if [ -f "playbook/inventory" ]; then
-	rm playbook/inventory
+        rm playbook/inventory
     fi
 
     cp templates/ansible_inventory.template playbook/inventory

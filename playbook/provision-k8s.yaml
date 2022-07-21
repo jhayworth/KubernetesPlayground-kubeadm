@@ -48,18 +48,18 @@
   - name: Lay down default config for containerd
     shell:
         cmd: containerd config default > config.toml
-	chdir: /etc/containerd
-	creates: config.toml
+        chdir: /etc/containerd
+        creates: config.toml
 
   - name: Restart containerd
     systemd:
         name: containerd
-	state: restarted
+        state: restarted
 
   - name: Install Kubernetes
     apt:
         name:
-	- kubelet
-	- kubeadm
-	- kubectl
-	- kubernetes-cni
+        - kubelet
+        - kubeadm
+        - kubectl
+        - kubernetes-cni
