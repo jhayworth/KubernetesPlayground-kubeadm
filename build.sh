@@ -33,16 +33,16 @@ if [ "$1" == "apply" ]; then
     read -p "Terraform should be done. Continue?"
     
     cd playbook
-    ansible-playbook -i inventory k8s-ping.yaml
+    ansible-playbook -vv -i inventory k8s-ping.yaml
     read -p "Ping test done. Continue?"
 
-    ansible-playbook -i inventory k8s-dependencies.yaml
+    ansible-playbook -vv -i inventory k8s-dependencies.yaml
     read -p "Dependencies have been installed. Continue?"
     
-    ansible-playbook -i inventory k8s-controller-setup.yaml
+    ansible-playbook -vv -i inventory k8s-controller-setup.yaml
     read -p "Controller setup complete. Continue?"
 
-    ansible-playbook -i inventory k8s-add-workers.yaml
+    ansible-playbook -vv -i inventory k8s-add-workers.yaml
     read -p "Worker nodes should be setup. Installation should be complete."
     
 elif [ "$1" == "destroy" ]; then

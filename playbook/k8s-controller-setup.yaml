@@ -4,8 +4,8 @@
   become: true
   tasks:
   - debug:
-        msg: Current known IP address: {{ ansible_default_ipv4.address }}
-  
+        msg: Current known IP address {{ ansible_default_ipv4.address }}
+
   - name: Remove swap
     shell: swapoff -a
 
