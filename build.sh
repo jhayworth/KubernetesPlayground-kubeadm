@@ -41,6 +41,9 @@ if [ "$1" == "apply" ]; then
     
     ansible-playbook -i inventory k8s-controller.setup.yaml
     read -p "Controller setup complete. Continue?"
+
+    ansible-playbook -i inventory k8s-add-workers.yaml
+    read -p "Worker nodes should be setup. Installation should be complete."
     
 elif [ "$1" == "destroy" ]; then
     terraform destroy
