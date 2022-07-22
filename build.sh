@@ -48,8 +48,8 @@ if [ "$1" == "apply" ]; then
 elif [ "$1" == "destroy" ]; then
     terraform destroy
 elif [ "$1" == "clean" ]; then
-    rm playbook/inventory
-    rm playbook/hosts
-    rm scripts/downloadartifacts.sh
-    rm *.txt
+    rm -f playbook/inventory
+    rm -f playbook/hosts
+    rm -f scripts/downloadartifacts.sh
+    rm -f *.txt
 fi
