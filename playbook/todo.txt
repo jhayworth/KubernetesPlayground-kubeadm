@@ -84,24 +84,33 @@ curl https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/k
 # https://www.howtoforge.com/setup-a-kubernetes-cluster-on-aws-ec2-instance-ubuntu-using-kubeadm/amp/
 # https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/
 # https://medium.com/andcloudio/creating-kubernetes-cluster-using-kubeadm-13b6f95b4fb9
+# https://www.arubacloud.com/tutorial/how-to-create-kubernetes-cluster-with-kubeadm-and-ansible-ubuntu-20-04.aspx
+# https://kubernetes.io/docs/concepts/cluster-administration/networking/
+# https://github.com/flannel-io/flannel#flannel
+
+primary    10.245.160.153
+secondary  10.245.160.20
+
+    node network: 10.245.160.0/24
+     pod network: 192.168.0.0/16
+service ip range: 10.96.0.0/24
+
+Considering switching pod network to 172.16.0.0/12 and service network to 192.168.0.0/16.
 
 
 
 
-To start using your cluster, you need to run the following as a regular user:
+Tasks:
+ [ ] set hostnames for primary and secondary
+ [ ] Fix the set_fact command in the k8s-add-workers.yaml playbook
+ [ ] figure out why the API port keeps going down
 
-  mkdir -p $HOME/.kube
-  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  sudo -i
+  swapoff -a
+  exit
+  strace -eopenat kubectl version
 
-Alternatively, if you are the root user, you can run:
+ [ ] there is a community supported GUI that you can install. Documentation on how to install the dashboard for these clusters is available at https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/.
 
-  export KUBECONFIG=/etc/kubernetes/admin.conf
 
-You should now deploy a pod network to the cluster.
-Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
-  https://kubernetes.io/docs/concepts/cluster-administration/addons/
 
-Then you can join any number of worker nodes by running the following on each as root:
-
-kubeadm join 10.245.160.91:6443 --token ad901a.6fddw8l9qt587vjr --discovery-token-ca-cert-hash sha256:a293e9b8ee732b5f2f304f764de54a8d2131a0e5fdd1c65187945f946c4752bb
