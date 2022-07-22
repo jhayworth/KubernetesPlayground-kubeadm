@@ -3,6 +3,11 @@
   hosts: all
   become: true
   tasks:
+  - name: Set hostname
+    hostname:
+        name: "{{ new_hostname }}"
+        use: systemd
+
   - name: APT HTTPS Transport
     apt:
         name: apt-transport-https
