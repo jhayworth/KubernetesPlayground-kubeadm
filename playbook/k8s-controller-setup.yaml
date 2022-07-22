@@ -1,6 +1,6 @@
 ---
 - name: Configuration of the Kubernetes controller node
-  hosts: master
+  hosts: controller
   become: true
   tasks:
   - name: Remove swap
