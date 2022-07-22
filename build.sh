@@ -18,9 +18,11 @@ generate_downloadartifacts_script() {
 generate_ansible_inventory () {
     if [ -f "playbook/inventory" ]; then
         rm playbook/inventory
+        rm playbook/hosts
     fi
 
     cp templates/ansible_inventory.template playbook/inventory
+    cp templates/hosts.template playbook/hosts
 }
 
 # Now we can run terraform
@@ -39,6 +41,7 @@ elif [ "$1" == "destroy" ]; then
     terraform destroy
 elif [ "$1" == "clean" ]; then
     rm playbook/inventory
+    rm playbook/hosts
     rm scripts/downloadartifacts.sh
     rm *.txt
 fi
