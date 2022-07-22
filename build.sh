@@ -39,7 +39,7 @@ if [ "$1" == "apply" ]; then
     ansible-playbook -i inventory k8s-dependencies.yaml
     read -p "Dependencies have been installed. Continue?"
     
-    ansible-playbook -i inventory k8s-controller.setup.yaml
+    ansible-playbook -i inventory k8s-controller-setup.yaml
     read -p "Controller setup complete. Continue?"
 
     ansible-playbook -i inventory k8s-add-workers.yaml
