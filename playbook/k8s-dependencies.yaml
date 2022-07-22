@@ -1,8 +1,13 @@
 ---
 - name: Preparation steps to for all nodes of a kubernetes cluster
-  hosts: kubernetes
+  hosts: all
   become: true
   tasks:
+  - name: APT HTTPS Transport
+    apt:
+        name: apt-transport-https
+	state: present
+
   - name: Ansible Update Cache and Upgrade all Packages
     apt:
         name: "*"
@@ -19,7 +24,7 @@
         - curl
         - gnupg
         - lsb-release 
-        force_apt_get: yes
+        state: present
         update_cache: yes
 
   - name: Add docker APT repo key to keyring

@@ -1,0 +1,44 @@
+---
+- name: Configuration of the Kubernetes controller node
+  hosts: master
+  become: true
+  tasks:
+  - name: Remove swap
+    shell: swapoff -a
+
+  - name: Initialize the cluster
+    shell: kubeadm init --pod-network-cidr=192.168.0.0/16 >> cluster_initialized.txt
+    args:
+        chdir: $HOME
+	creates: cluster_initialized.txt
+
+  - name: Create .kube directory
+    become: true
+    become_user: ubuntu
+    file:
+        path: $HOME/.kube
+	state: directory
+	mode: 0755
+
+  - name: Copy admin.conf to user's kube config
+    copy:
+        src: /etc/kubernetes/admin.conf
+	dest: /home/ubuntu/.kube/config
+	remote_src: yes
+	owner: ubuntu
+
+  - name: Copy flannel configuration to controller
+    copy:
+        src: kube-flannel.yaml
+	dest: /home/ubuntu/kube-flannel.yaml
+	owner: ubuntu
+	group: ubuntu
+	mode: '0644'
+
+  - name: Install Pod network
+    become: yes
+    become_user: ubuntu
+    shell: kubectl apply -f kube-flannel.yaml >> pod_network_setup.txt
+    args:
+        chdir: $HOME
+	creates: pod_network_setup.txt
