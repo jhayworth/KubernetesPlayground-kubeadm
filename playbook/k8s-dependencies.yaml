@@ -6,7 +6,7 @@
   - name: APT HTTPS Transport
     apt:
         name: apt-transport-https
-	state: present
+        state: present
 
   - name: Ansible Update Cache and Upgrade all Packages
     apt:
@@ -19,11 +19,11 @@
         name:
         - tmux
         - emacs
-	- net-tools
+        - net-tools
         - ca-certificates
         - curl
         - gnupg
-        - lsb-release 
+        - lsb-release
         state: present
         update_cache: yes
 
