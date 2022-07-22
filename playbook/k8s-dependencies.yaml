@@ -62,9 +62,9 @@
   - name: Remove containerd default config
     file:
         path: /etc/containerd/config.toml
-	state: absent
+        state: absent
 
   - name: Restart containerd service
     systemd:
         name: containerd
-	state: restarted
+        state: restarted
