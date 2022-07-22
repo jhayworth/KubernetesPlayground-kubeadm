@@ -71,9 +71,37 @@ https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-clu
 # --pod-network-cidr string
 Specify range of IP addresses for the pod network. If set, the control plane will automatically allocate CIDRs for every node.
 
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=10.245.160.87
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=10.245.160.91
+
+# == Step 5 - Setting up child node
+kubeadm join 10.245.160.91:6443 --token ad901a.6fddw8l9qt587vjr --discovery-token-ca-cert-hash sha256:a293e9b8ee732b5f2f304f764de54a8d2131a0e5fdd1c65187945f946c4752bb
+
+# == Step 6 - Setting up networking
+curl https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml | sed "s/vxlan/host-gw/g" > kube-flannel.yaml
+
 
 # == References
 # https://www.howtoforge.com/setup-a-kubernetes-cluster-on-aws-ec2-instance-ubuntu-using-kubeadm/amp/
 # https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/
 # https://medium.com/andcloudio/creating-kubernetes-cluster-using-kubeadm-13b6f95b4fb9
+
+
+
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 10.245.160.91:6443 --token ad901a.6fddw8l9qt587vjr --discovery-token-ca-cert-hash sha256:a293e9b8ee732b5f2f304f764de54a8d2131a0e5fdd1c65187945f946c4752bb
