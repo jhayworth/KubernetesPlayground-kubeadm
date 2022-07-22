@@ -23,4 +23,4 @@
     shell: "{{ hostvars['controller'].join_command }} >> node_joined.txt"
     args:
         chdir: $HOME
-	creates: node_joined.txt
+        creates: node_joined.txt
