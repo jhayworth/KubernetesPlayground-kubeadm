@@ -58,3 +58,13 @@
         - kubeadm
         - kubectl
         - kubernetes-cni
+
+  - name: Remove containerd default config
+    file:
+        path: /etc/containerd/config.toml
+	state: absent
+
+  - name: Restart containerd service
+    systemd:
+        name: containerd
+	state: restarted
