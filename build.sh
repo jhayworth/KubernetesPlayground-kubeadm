@@ -29,9 +29,13 @@ generate_ansible_inventory () {
 if [ "$1" == "init" ]; then
     terraform init
 elif [ "$1" == "apply" ]; then
+    export ANSIBLE_HOST_KEY_CHECKING=false
+    
     #generate_downloadartifacts_script
     generate_ansible_inventory
     terraform apply | tee terraform_run.log
+    echo "Sleeping for 20 seconds while the servers warm up"
+    sleep 20s
     read -p "Terraform should be done. Continue?"
     
     cd playbook
