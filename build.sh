@@ -26,7 +26,9 @@ generate_ansible_inventory () {
 }
 
 # Now we can run terraform
-if [ "$1" == "apply" ]; then
+if [ "$1" == "init" ]; then
+    terraform init
+elif [ "$1" == "apply" ]; then
     #generate_downloadartifacts_script
     generate_ansible_inventory
     terraform apply | tee terraform_run.log
