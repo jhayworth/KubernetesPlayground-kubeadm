@@ -87,14 +87,23 @@
         - kubelet
         - kubeadm
         - kubectl
-        - kubernetes-cni
 
   - name: Remove containerd default config
     file:
         path: /etc/containerd/config.toml
         state: absent
 
+  - name: Configure node ip
+    lineinfile:
+      path: /etc/default/kubelet
+      line: KUBELET_EXTRA_ARGS=--node-ip={{ ansible_default_ipv4.address }}
+
   - name: Restart containerd service
     systemd:
         name: containerd
+        state: restarted
+
+  - name: Restart kubelet
+    systemd:
+        name: kubelet
         state: restarted
