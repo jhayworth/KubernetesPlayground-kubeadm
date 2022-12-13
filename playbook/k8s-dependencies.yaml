@@ -25,10 +25,13 @@
         - tmux
         - emacs
         - net-tools
+        - apt-transport-https
         - ca-certificates
         - curl
         - gnupg
+        - gnupg-agent
         - lsb-release
+        - software-properties-common
         state: present
         update_cache: yes
 
