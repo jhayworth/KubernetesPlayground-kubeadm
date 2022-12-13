@@ -1,5 +1,6 @@
 # Specific files derived from templates
 playbook/inventory
+playbook/hosts
 scritps/downloadartifacts.sh
 
 # General
