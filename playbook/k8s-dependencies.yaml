@@ -3,6 +3,14 @@
   hosts: all
   become: true
   tasks:
+  - name: Copy new hosts file
+    copy:
+        src: hosts
+        dest: /etc/hosts
+        owner: root
+        group: root
+        mode: '0644'
+    
   - name: Set hostname
     hostname:
         name: "{{ new_hostname }}"

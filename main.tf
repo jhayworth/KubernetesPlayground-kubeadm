@@ -47,11 +47,6 @@ resource "aws_instance" "kubernetes-primary" {
     provisioner "local-exec" { command = "echo private_ip : ${aws_instance.kubernetes-primary.private_ip} >> ${aws_instance.kubernetes-primary.id}_id.txt" }
     provisioner "local-exec" { command = "scripts/prepare-ansible-inventory.sh primary ${aws_instance.kubernetes-primary.private_ip}" }
 
-    provisioner "file" {
-        source = "playbook/hosts"
-	destination = "/etc/hosts"
-    }
-
     #provisioner "file" {
     #    source = "scripts/downloadartifacts.sh"
     #    destination = "/tmp/downloadartifacts.sh"
