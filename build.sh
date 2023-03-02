@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Test change (please ignore)
+
 generate_downloadartifacts_script() {
     # Let's get our current vault token
     VAULT_REPLACE_SCRIPT="s/{:VAULT_TOKEN:}/$(cat ~/.vault-token)/g"
